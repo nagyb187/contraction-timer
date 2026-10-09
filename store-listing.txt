@@ -1,0 +1,106 @@
+App Store listing draft. Price is set in App Store Connect, not in the app.
+Category: Health & Fitness. Age rating: 4+. Privacy: Data Not Collected.
+Support URL: https://nbsailing.hu
+Privacy URL: https://nbsailing.hu/contraction-privacy.html
+
+The app is a personal time log. Do not write that it detects labor, gives medical advice, or tells anyone when to go to the hospital.
+
+en
+Name: Contraction Timer
+Subtitle: Offline start and end log
+Keywords: contraction,labor,timer,interval,duration,birth,offline,log,wehen,contraccion
+Description:
+A quiet timer for contractions. Tap Start when one begins and End when it passes. The last interval is the large number. Duration stays smaller underneath. The newest row is at the top.
+Under 10 minutes, times show minutes and seconds. Longer gaps round to the nearest minute.
+Everything stays on this iPhone. There is no account, no network, and no ads.
+This is a time log, not medical advice.
+
+de
+Name: Wehen-Timer
+Subtitle: Offline, Anfang und Ende
+Keywords: wehen,timer,geburt,abstand,dauer,intervall,offline,geburtswehen,kontraktion
+Description:
+Ein ruhiger Timer für Wehen. Anfang, wenn sie beginnt. Ende, wenn sie vorbei ist. Der letzte Abstand ist die große Zahl, die Dauer steht kleiner darunter. Die neueste Zeile steht oben.
+Unter 10 Minuten in Minuten und Sekunden, darüber auf die nächste Minute gerundet.
+Alles bleibt auf diesem iPhone. Kein Konto, kein Netz, keine Werbung.
+Ein Zeitprotokoll, kein medizinischer Rat.
+
+es
+Name: Contracciones
+Subtitle: Inicio y fin, sin red
+Keywords: contraccion,parto,timer,intervalo,duracion,offline,cronometro,trabajo
+Description:
+Un temporizador tranquilo. Inicio cuando empieza, fin cuando pasa. El último intervalo es el número grande. La duración queda más pequeña debajo. La fila más reciente está arriba.
+Por debajo de 10 minutos: minutos y segundos. Después, el minuto más cercano.
+Todo se queda en este iPhone. Sin cuenta, sin red y sin anuncios.
+Es un registro de tiempos, no un consejo médico.
+
+fr
+Name: Contractions
+Subtitle: Début et fin, hors ligne
+Keywords: contraction,accouchement,travail,intervalle,duree,minuteur,offline,naissance
+Description:
+Un minuteur calme. Début quand ça commence, fin quand ça passe. Le dernier intervalle est le grand chiffre. La durée reste plus petite en dessous. La ligne la plus récente est en haut.
+Moins de 10 minutes : minutes et secondes. Au-delà : la minute la plus proche.
+Tout reste sur cet iPhone. Pas de compte, pas de réseau, pas de publicité.
+Un journal de temps, pas un avis médical.
+
+pt
+Name: Contrações
+Subtitle: Início e fim, sem rede
+Keywords: contracao,parto,timer,intervalo,duracao,offline,trabalho,nascimento
+Description:
+Um temporizador calmo. Início quando começa, fim quando passa. O último intervalo é o número grande. A duração fica menor por baixo. A linha mais recente fica no topo.
+Abaixo de 10 minutos: minutos e segundos. Acima: o minuto mais próximo.
+Tudo fica neste iPhone. Sem conta, sem rede e sem anúncios.
+Um registo de tempos, não um conselho médico.
+
+it
+Name: Contrazioni
+Subtitle: Inizio e fine, offline
+Keywords: contrazione,parto,travaglio,intervallo,durata,timer,offline,nascita
+Description:
+Un timer silenzioso. Inizio quando comincia, fine quando passa. L'ultimo intervallo è il numero grande. La durata resta più piccola sotto. La riga più recente è in alto.
+Sotto i 10 minuti: minuti e secondi. Oltre: il minuto più vicino.
+Tutto resta su questo iPhone. Nessun account, nessuna rete, nessuna pubblicità.
+Un diario dei tempi, non un consiglio medico.
+
+pl
+Name: Skurcze
+Subtitle: Początek i koniec, offline
+Keywords: skurcze,porod,timer,odstep,czas,interwal,offline,kontrakcje
+Description:
+Spokojny minutnik. Początek, gdy skurcz się zaczyna. Koniec, gdy mija. Ostatni odstęp jest dużą liczbą. Czas trwania jest mniejszy pod spodem. Najnowszy wiersz jest na górze.
+Poniżej 10 minut: minuty i sekundy. Powyżej: najbliższa minuta.
+Wszystko zostaje na tym iPhonie. Bez konta, bez sieci i bez reklam.
+Dziennik czasu, nie porada medyczna.
+
+nl
+Name: Weeëntimer
+Subtitle: Begin en einde, offline
+Keywords: weeën,bevalling,timer,pauze,duur,interval,offline,ontsluiting
+Description:
+Een rustige timer. Begin als een wee start, einde als ze voorbij is. De laatste pauze is het grote getal. De duur staat kleiner eronder. De nieuwste rij staat bovenaan.
+Onder 10 minuten in minuten en seconden, daarboven de dichtstbijzijnde minuut.
+Alles blijft op deze iPhone. Geen account, geen netwerk, geen reclame.
+Een tijdlog, geen medisch advies.
+
+ja
+Name: 陣痛タイマー
+Subtitle: 開始と終了、オフライン
+Keywords: 陣痛,タイマー,間隔,出産,お産,記録,オフライン,陣痛間隔
+Description:
+静かな陣痛タイマーです。始まったら開始、おさまったら終了。最後の間隔が大きく表示され、長さはその下に小さく出ます。新しい記録が上に来ます。
+10分未満は分と秒、それ以上は一番近い分です。
+記録はこのiPhoneだけに残ります。アカウントも通信も広告もありません。
+時間の記録であり、医療上の助言ではありません。
+
+hu
+Name: Összehúzódások
+Subtitle: Eleje és vége, internet nélkül
+Keywords: osszehuzodas,fajas,idozito,idoskoz,idotartam,szules,offline,naplo
+Description:
+Egy csendes időmérő. Eleje, amikor kezdődik. Vége, amikor elmúlik. Az utolsó időköz a nagy szám, az időtartam alatta kisebben látszik. A legutóbbi sor van felül.
+10 perc alatt perc és másodperc, azon felül a legközelebbi perc.
+Minden ezen az iPhone-on marad. Nincs fiók, nincs hálózat, nincs reklám.
+Időnapló, nem orvosi tanács.
