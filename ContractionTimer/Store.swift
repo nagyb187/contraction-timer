@@ -1,24 +1,13 @@
 import Foundation
 import UIKit
 
-struct Contraction: Codable, Identifiable, Equatable {
-    var id: UUID
-    var start: TimeInterval
-    var end: TimeInterval?
-
-    init(id: UUID = UUID(), start: TimeInterval, end: TimeInterval?) {
-        self.id = id
-        self.start = start
-        self.end = end
-    }
-}
-
 @MainActor
 @Observable
 final class LogStore {
     private let rowsKey = "contractions.v1"
     private let languageKey = "language.v1"
     private let awakeKey = "awake.v1"
+    private let updatedKey = "contractions.updatedAt"
 
     var rows: [Contraction] = []
     var previous: [Contraction]?
@@ -30,19 +19,28 @@ final class LogStore {
     var now = Date()
 
     private var bannerToken = 0
+    private var updatedAt: TimeInterval = 0
 
     init() {
         if let data = UserDefaults.standard.data(forKey: rowsKey),
            let stored = try? JSONDecoder().decode([Contraction].self, from: data) {
-            rows = stored.sorted { $0.start < $1.start }
-            if rows.count > 1 {
-                for index in 0..<(rows.count - 1) where rows[index].end == nil {
-                    rows[index].end = rows[index + 1].start
-                }
-            }
+            rows = Timing.sanitize(stored)
         }
         language = UserDefaults.standard.string(forKey: languageKey)
         awake = UserDefaults.standard.bool(forKey: awakeKey)
+        updatedAt = UserDefaults.standard.double(forKey: updatedKey)
+        if updatedAt == 0, !rows.isEmpty || language != nil {
+            updatedAt = Date().timeIntervalSince1970
+            UserDefaults.standard.set(updatedAt, forKey: updatedKey)
+        }
+        let bridge = SyncBridge.shared
+        bridge.current = { [weak self] in
+            self?.makeSnapshot() ?? Snapshot(rows: [], language: nil, updatedAt: 0)
+        }
+        bridge.onSnapshot = { [weak self] snapshot in
+            self?.applyRemote(snapshot)
+        }
+        bridge.start()
     }
 
     var copy: Copy {
@@ -57,6 +55,7 @@ final class LogStore {
     func setLanguage(_ code: String) {
         language = code
         UserDefaults.standard.set(code, forKey: languageKey)
+        persist()
     }
 
     func toggleAwake() {
@@ -110,31 +109,33 @@ final class LogStore {
     }
 
     func interval(at index: Int) -> TimeInterval? {
-        guard index > 0 else { return nil }
-        return rows[index].start - rows[index - 1].start
+        Timing.interval(rows, at: index)
     }
 
     func duration(_ row: Contraction, now: Date = Date()) -> TimeInterval {
-        let end = row.end ?? now.timeIntervalSince1970
-        return max(0, end - row.start)
+        Timing.duration(row, now: now)
     }
 
     func stamp(_ ts: TimeInterval, now: Date = Date()) -> String {
-        let date = Date(timeIntervalSince1970: ts)
-        let formatter = DateFormatter()
-        formatter.locale = Lang(rawValue: language ?? "en")?.locale ?? Locale(identifier: "en_US")
-        if Calendar.current.isDate(date, inSameDayAs: now) {
-            formatter.dateStyle = .none
-            formatter.timeStyle = .medium
-        } else {
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .medium
-        }
-        return formatter.string(from: date)
+        Timing.stamp(ts, language: language, now: now)
     }
 
     func gapText(_ seconds: TimeInterval) -> String {
-        L10n.formatGap(seconds * 1000, code: language ?? "en", copy: copy)
+        Timing.gap(seconds, language: language)
+    }
+
+    private func makeSnapshot() -> Snapshot {
+        Snapshot(rows: rows, language: language, updatedAt: updatedAt)
+    }
+
+    private func applyRemote(_ snapshot: Snapshot) {
+        guard snapshot.updatedAt > updatedAt else { return }
+        rows = Timing.sanitize(snapshot.rows)
+        language = snapshot.language
+        updatedAt = snapshot.updatedAt
+        previous = nil
+        armClear = false
+        saveLocally()
     }
 
     private func shareText() -> String {
@@ -160,9 +161,17 @@ final class LogStore {
     }
 
     private func persist() {
+        updatedAt = Date().timeIntervalSince1970
+        saveLocally()
+        SyncBridge.shared.send(makeSnapshot())
+    }
+
+    private func saveLocally() {
         if let data = try? JSONEncoder().encode(rows) {
             UserDefaults.standard.set(data, forKey: rowsKey)
         }
+        UserDefaults.standard.set(language, forKey: languageKey)
+        UserDefaults.standard.set(updatedAt, forKey: updatedKey)
     }
 
     private func note(_ text: String) {
