@@ -149,16 +149,23 @@ struct LogView: View {
         }
     }
 
-    @ViewBuilder
     private func hero(_ text: Copy, now: Date) -> some View {
         let rows = store.rows
         let open = store.open
-        let lastDone = rows.last { $0.end != nil }
+        let lastDone = rows.last(where: { $0.end != nil })
         let newestInterval = rows.count >= 2 ? store.interval(at: rows.count - 1) : nil
         let count = L10n.count(rows.count, code: store.language ?? "en", copy: text)
 
+        let label: String
+        let big: String
+        let small: String
+        let bigSize: CGFloat
+
         if rows.isEmpty {
-            labeled(text.lastInterval, big: text.noMarks, small: text.emptyHint, bigSize: 36)
+            label = text.lastInterval
+            big = text.noMarks
+            small = text.emptyHint
+            bigSize = 36
         } else if let newestInterval {
             let durationText: String
             if let open {
@@ -168,12 +175,28 @@ struct LogView: View {
             } else {
                 durationText = text.noInterval
             }
-            labeled(text.lastInterval, big: store.gapText(newestInterval), small: "\(durationText) · \(count)", bigSize: 48)
+            label = text.lastInterval
+            big = store.gapText(newestInterval)
+            small = "\(durationText) · \(count)"
+            bigSize = 48
         } else if let open {
-            labeled(text.ongoing, big: store.gapText(store.duration(open, now: now)), small: text.noInterval, bigSize: 48)
+            label = text.ongoing
+            big = store.gapText(store.duration(open, now: now))
+            small = text.noInterval
+            bigSize = 48
         } else if let lastDone {
-            labeled(text.lastDuration, big: store.gapText(store.duration(lastDone, now: now)), small: text.noInterval, bigSize: 48)
+            label = text.lastDuration
+            big = store.gapText(store.duration(lastDone, now: now))
+            small = text.noInterval
+            bigSize = 48
+        } else {
+            label = text.lastInterval
+            big = text.noMarks
+            small = text.emptyHint
+            bigSize = 36
         }
+
+        return labeled(label, big: big, small: small, bigSize: bigSize)
     }
 
     private func labeled(_ label: String, big: String, small: String, bigSize: CGFloat) -> some View {
