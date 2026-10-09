@@ -82,13 +82,13 @@ struct LogView: View {
                 header(text)
                 hero(text, now: store.now)
                     .padding(.top, 22)
+                footer(text)
                 if store.rows.isEmpty {
                     Spacer(minLength: 16)
                 } else {
                     logCard(text, now: store.now)
-                        .padding(.top, 18)
+                        .padding(.top, 12)
                 }
-                footer(text)
             }
             .padding(.horizontal, 20)
             .padding(.top, 18)
