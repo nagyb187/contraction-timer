@@ -122,13 +122,12 @@ enum L10n {
     }
 
     private static func load() -> [String: Copy] {
+        let data = Data(BundledStrings.json.utf8)
         guard
-            let url = Bundle.main.url(forResource: "strings", withExtension: "json"),
-            let data = try? Data(contentsOf: url),
             let decoded = try? JSONDecoder().decode([String: Copy].self, from: data),
             decoded["en"] != nil
         else {
-            fatalError("strings.json missing from the app bundle")
+            fatalError("Bundled translations could not be read")
         }
         return decoded
     }
